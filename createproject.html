@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+		 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+		 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+		    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-storage.js"></script>
+			<script src="db.js" type="text/javascript"></script>
+		<script src="projects.js" type="text/javascript"></script>
+		<script src="logout.js" type="text/javascript"></script>
+		
+<title>Page Title</title>
+<link rel="stylesheet" href="PAGE2.css">
+
+</head>
+
+
+<body style="background-color:#bfbfbf;">
+<div class="right">
+<img src="title.png" alt="alternatetext" style="width:350px;height:80px;">
+
+</div>
+
+<ul>
+  <li><a class="active" href="home.html">Projects</a></li>
+  <li><a href="createproject.html">Create Project</a></li>
+  <li><a href="AddUsers.html">Add User</a></li>
+<li style="float:right"><a class="activee"onclick="openHelp()" id="openHelp">Help</a></li>
+  <li style="float:right"><a class="activee"onclick="signOut()" id="signOut">Sign Out</a></li>
+
+</ul>
+		<div class="LogOut">
+
+</div>
+
+
+<div class="rightt">
+Please Enter the Project Name: 
+  <input type="text" id="projectName">  
+<button onclick="submitN()">Submit</button>
+<p id="pname"></p>   
+<script type="text/javascript">
+function submitN(){
+	var projectNameVal = document.getElementById('projectName').value;
+	 if (projectNameVal.length < 6)
+      { 
+         alert("Please Enter a project name more than 6 characters.");  	
+		 console.log(projectNameVal);
+        
+      }  	
+	  else{
+	    var projectRef = firebase.storage().ref().child(projectNameVal + "/anchor.txt");
+		projectRef.put(new File(['anchor'], 'anchor.txt')).then(function(snapshot) {
+    console.log("Project anchor inserted.");
+		});
+	    alert("Project " + projectNameVal + " has beeen inserted.");  
+		document.getElementById('projectName').value = "";
+	  }
+		
+}
+</script>
+
+</form>
+
+
+
+	
+	
+
+		
+</body>
+</html>
